@@ -1,0 +1,33 @@
+- Write a fun program that runs in 10 seconds when using your fun interpreter
+  from p2. Please don't commit it. Run the compiled version from p4, how long
+  does it take to run?
+0.22s
+```
+fact = fun {
+   out = 0
+   while (it > 0) {
+       out = out + it
+       it = it - 1
+   }
+   return out
+}
+
+print fact(16000000)```
+
+- Why does compiled code run faster than interpreted code?
+Because in the interpreter, for every expression or statement, the interpreter has to parse the code, then interpret it, then execute it, which could take hundreds of instructions. In the compiled code, the code is already parsed and translated into machine code, so it doesn't have to go through as many steps for each expression or statement.
+
+- Does your code run as fast as it could? What is slowing it down?
+No, it doesn't run as fast as it could. In my code, I constantly write to memory, because I push most registers to the stack, then pop them back off when doing something. This slows it down because of the memory access time. QEMU also slows it down because it's an emulator, and it has to emulate the ARM architecture using an interpreter for machine code, which is slower than running it on actual hardware.
+
+- What is emulator? Use your words and give examples
+An emulator is a program that runs on one architecture, but emulates another architecture. For example, many people emulate the Wii on their computers using Dolphin, which is an emulator for the Wii, which runs on a PowerPC architecture, but the computer runs on something else.
+
+- What is a cross-compiler? Use your words and give examples
+A cross-compiler is a compiler that runs on one architecture, but compiles code for another architecture. For example, we used the aarch64-none-linux-gnu-gcc cross-compiler to compile our code for the ARM architecture, but we ran the compiler on our x86-64 architecture.
+
+- What is a tool-chain? Use your words and give examples
+A tool-chain is a group of tools used to compile code. For example, the aarch64-none-linux-gnu-gcc cross-compiler is part of a tool-chain, which includes the assembler, linker, and other tools that work together to compile code for the ARM architecture.
+
+- Why did I add the "argc" requirement in this assignment?
+The argc requirement was added so we couldn't just output the compiled interpreter for p2 to a file and run it in p4.
